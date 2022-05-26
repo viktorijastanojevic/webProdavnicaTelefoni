@@ -18,11 +18,7 @@ class PorukaController extends Controller
     {
         return  Poruka::all();
     }
-
-
-
-
-
+ 
     public function primiPoruku(Request $request)
     {
          
@@ -37,7 +33,7 @@ class PorukaController extends Controller
             ]
         );
         if ($validator->fails()) 
-            return response()->json(['success'=>'aaa']);
+            return response()->json(['success'=>'false']);
 
 
          

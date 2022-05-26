@@ -66,10 +66,8 @@ function Navbar({cartNum,token}) {
 
                       <li className='elementListeNavbar'><Link to="/telefoni">Telefoni</Link>  </li>
                       <li className='elementListeNavbar'><Link to="/uporedi">Uporedi</Link> </li>
-                      <li className='elementListeNavbar'><Link to="/kupovina"  className="navbar-items" >Kupovina </Link></li>
-                      <li className='elementListeNavbar'> <Link to="/korpa" className="navbar-items" >
-                        <BsCartFill />
-                        <p className="cart-num">{cartNum}</p>
+                      <li className='elementListeNavbar'> <Link to="/korpa" >
+                        <BsCartFill /> <p className="cart-num">{cartNum}</p>
 
                     </Link></li>
                     </>
