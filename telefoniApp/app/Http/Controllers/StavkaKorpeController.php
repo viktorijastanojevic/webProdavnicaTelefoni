@@ -14,7 +14,7 @@ class StavkaKorpeController extends Controller
      */
     public function index()
     {
-        //
+        return StavkaKorpe::all();
     }
 
     /**
@@ -33,10 +33,10 @@ class StavkaKorpeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        //
-    }
+      
+;    }
 
     /**
      * Display the specified resource.
@@ -44,9 +44,9 @@ class StavkaKorpeController extends Controller
      * @param  \App\Models\StavkaKorpe  $stavkaKorpe
      * @return \Illuminate\Http\Response
      */
-    public function show(StavkaKorpe $stavkaKorpe)
+    public function show($id)
     {
-        //
+        return StavkaKorpe::find($id);
     }
 
     /**

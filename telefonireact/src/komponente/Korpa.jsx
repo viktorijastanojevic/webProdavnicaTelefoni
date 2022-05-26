@@ -3,7 +3,13 @@ import "jspdf-autotable";
 import React from "react";
 import {BsPlusLg, BsDashLg} from "react-icons/bs"
 const Korpa = ({products, sum,onAdd,onRemove}) => {
+    function sacuvajKorpuUBazi(){
+
+
+        
+    }
     function exportPDF() {
+        sacuvajKorpuUBazi();
         const unit = "pt";
         const size = "A4"; // Use A1, A2, A3 or A4
         const orientation = "landscape"; // portrait or landscape
