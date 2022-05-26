@@ -22,7 +22,8 @@ function App() {
   const [cartNum, setCartNum] = useState(0); 
   const [sort, setSort] = useState(true);
   const[token,setToken] = useState();
- 
+  const [cartProducts, setCartProducts] = useState([]);
+  const [sum, setSumPrice] = useState(0); 
   const [telefoniUporedjivanje, setTelefoniUporedjivanje] = useState([]);
   const [brojTelefonaZaUporedjivanje, setBrTelZaUp] = useState(0);
 
@@ -69,7 +70,50 @@ function dodajTelefon(id){
 function addToken(auth_token){
   setToken(auth_token);
 }
- 
+  
+function refreshCart() {
+  let u_korpi = telefoni.filter((p) => p.amount > 0);
+  setCartProducts(u_korpi);
+}
+function jeUKorpi(id){
+  cartProducts.forEach((p) => {
+    if (p.id === id) {
+       return true;
+    }
+  });
+  return false;
+}
+function addProduct( id) {
+  
+  setCartNum(cartNum + 1);
+
+  telefoni.forEach((p) => {
+    if (p.id === id) {
+      p.amount++;
+      setSumPrice(sum+p.price);
+    }
+  });
+  refreshCart();
+
+}
+
+function removeProduct( id) {
+  if(jeUKorpi(id)){
+    setCartNum(cartNum - 1);
+    telefoni.forEach((p) => {
+      if (p.id === id) {
+        if(p.amount === 0){
+          return;
+        }else{
+          p.amount--; 
+        }
+      }
+    });
+    refreshCart();
+  }
+
+
+}
   return (
     <div className="App">
       <BrowserRouter className="App">
@@ -82,7 +126,7 @@ function addToken(auth_token){
             <Route path="/login" element={ <Login addToken={addToken}></Login>}></Route>
             <Route path="/register" element={ <Register addToken={addToken}></Register>}></Route>
 
-            <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon}></Ponuda>}></Route>
+            <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon} onAdd={addProduct} onRemove={removeProduct}></Ponuda>}></Route>
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
             <Route path="/*" element={<NotFound404></NotFound404>}/>
         </Routes>

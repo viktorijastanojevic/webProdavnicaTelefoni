@@ -28,6 +28,8 @@ function Footer() {
               <li><a href="/">Pocetna</a></li>
               <li><a href="/telefoni">Ponuda</a></li>
               <li><a href="/uporedi">Uporedjivanje</a></li>
+              <li><a href="/kontakt">Kontakt</a></li>
+
             
             </ul>
           </div>

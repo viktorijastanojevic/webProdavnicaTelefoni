@@ -3,9 +3,9 @@ import React from 'react'
 import { BsFillPhoneFill} from 'react-icons/bs';
 import { MdMobileScreenShare,MdPriceChange } from 'react-icons/md';
 import { FaWeightHanging } from 'react-icons/fa';
+import {BsPlusLg, BsDashLg} from "react-icons/bs"
 
-
-function TelefonKartica({product,dodajTelefon}) {
+function TelefonKartica({product,dodajTelefon,onAdd,onRemove, inCart}) {
   return (
     <div className="card">
      
@@ -25,6 +25,17 @@ function TelefonKartica({product,dodajTelefon}) {
         <br /><br /><MdPriceChange></MdPriceChange><b>  Cena:</b> {product.price} RSD 
          </h6>
          <button className='btn' onClick={()=>dodajTelefon(product.id)} style={{background:"#adcaf7",marginLeft:"60%"}}> Uporedi  </button>
+         <button
+                  className="btn"
+                  onClick={() => onAdd( product.id)}
+                >
+                <BsPlusLg />
+              </button>
+              <button 
+                className="btn"
+                onClick={() => onRemove( product.id)}>
+                <BsDashLg />
+            </button>
         
     </div> 
 </div>
