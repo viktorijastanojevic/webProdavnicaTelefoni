@@ -15,6 +15,7 @@ import Login from './komponente/Login';
 import Register from './komponente/Register';
 import Kontakt from './komponente/Kontakt';
 import NotFound404 from './komponente/NotFound404';
+import Korpa from './komponente/Korpa';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -74,14 +75,22 @@ function addToken(auth_token){
 function refreshCart() {
   let u_korpi = telefoni.filter((p) => p.amount > 0);
   setCartProducts(u_korpi);
+  var suma=0;
+  cartProducts.forEach((p)=>{
+    suma+=p.price*p.amount;
+  })
+  setSumPrice(suma);
 }
 function jeUKorpi(id){
+  var postoji=0;
   cartProducts.forEach((p) => {
     if (p.id === id) {
-       return true;
+      console.log("C")
+      postoji=1;
     }
   });
-  return false;
+   
+  return postoji;
 }
 function addProduct( id) {
   
@@ -98,7 +107,9 @@ function addProduct( id) {
 }
 
 function removeProduct( id) {
-  if(jeUKorpi(id)){
+  console.log("A")
+  if(jeUKorpi(id)===1){
+    console.log("B")
     setCartNum(cartNum - 1);
     telefoni.forEach((p) => {
       if (p.id === id) {
@@ -128,6 +139,9 @@ function removeProduct( id) {
 
             <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon} onAdd={addProduct} onRemove={removeProduct}></Ponuda>}></Route>
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
+            <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
+            
+            
             <Route path="/*" element={<NotFound404></NotFound404>}/>
         </Routes>
            

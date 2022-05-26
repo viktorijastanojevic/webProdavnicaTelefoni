@@ -18,7 +18,7 @@ class CreateProizvodsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->double('price');
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
             $table->foreignId('category');
             $table->string('image');
             $table->integer('uporedi')->default(0);
