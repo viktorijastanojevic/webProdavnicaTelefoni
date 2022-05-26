@@ -14,6 +14,7 @@ import axios from "axios";
 import Login from './komponente/Login';
 import Register from './komponente/Register';
 import Kontakt from './komponente/Kontakt';
+import NotFound404 from './komponente/NotFound404';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -83,7 +84,7 @@ function addToken(auth_token){
 
             <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon}></Ponuda>}></Route>
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
-            
+            <Route path="/*" element={<NotFound404></NotFound404>}/>
         </Routes>
            
           
