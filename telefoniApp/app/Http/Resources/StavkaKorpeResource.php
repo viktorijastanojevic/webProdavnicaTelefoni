@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Proizvod;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StavkaKorpeResource extends JsonResource
@@ -14,6 +16,15 @@ class StavkaKorpeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return  [
+            'korpa' => $this->resource->korpa_id,
+            'proizvod' => new ProizvodResource(Proizvod::find($this->resource->proizvod_id)),
+            'user' => new UserResource (User::find($this->resource->user_id)),
+            'kolicina' => $this->resource->kolicina,
+
+            'ukupna_cena' => $this->resource->ukupna_cena
+
+
+        ];
     }
 }
