@@ -16,6 +16,8 @@ import Register from './komponente/Register';
 import Kontakt from './komponente/Kontakt';
 import NotFound404 from './komponente/NotFound404';
 import Korpa from './komponente/Korpa';
+import AdminDashboard from './komponente/AdminDashboard';
+import Poruke from './komponente/Poruke';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -27,7 +29,7 @@ function App() {
   const [sum, setSumPrice] = useState(0); 
   const [telefoniUporedjivanje, setTelefoniUporedjivanje] = useState([]);
   const [brojTelefonaZaUporedjivanje, setBrTelZaUp] = useState(0);
-
+  const [poruke,setPoruke] = useState([]);
 
   const [telefoni,setTelefoni] = useState([ ]);
   useEffect(() => {
@@ -50,6 +52,33 @@ function App() {
     };
     getRandomLists();
   }, [ axiosInstance]);
+
+
+  useEffect(() => {
+    const getRandomLists2 = async () => {
+      try {
+        const res = await axiosInstance.get( "http://127.0.0.1:8000/api/poruke",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                ( window.sessionStorage.getItem("auth_token")),
+            },
+          }
+        );
+        setPoruke(res.data);
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomLists2();
+  }, [ axiosInstance]);
+
+
+
+
+
 
 
 function dodajTelefon(id){
@@ -140,6 +169,8 @@ function removeProduct( id) {
             <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon} onAdd={addProduct} onRemove={removeProduct}></Ponuda>}></Route>
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
             <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
+            <Route path="/admin" element={ <AdminDashboard></AdminDashboard>}></Route>
+            <Route path="/admin/poruke" element={ <Poruke poruke={poruke}></Poruke>}></Route>
             
             
             <Route path="/*" element={<NotFound404></NotFound404>}/>

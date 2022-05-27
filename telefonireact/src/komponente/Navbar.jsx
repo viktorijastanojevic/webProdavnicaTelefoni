@@ -56,9 +56,13 @@ function Navbar({cartNum,token}) {
              <>  
              
                 {window.sessionStorage.getItem("auth_name")=='Admin'  ? 
-                //admin moze da vidi poruke i da dodaje nove proizvode
+                //admin moze da vidi poruke i da dodaje nove/brise/azurira proizvode
                     <> 
-                        
+                           <li className='elementListeNavbar'><Link to="/admin/dodajProizvod">Dodaj novi proizvod</Link>  </li>
+                           <li className='elementListeNavbar'><Link to="/admin/izmeniProizvod">Izmeni proizvod</Link>  </li>
+                           <li className='elementListeNavbar'><Link to="/admin/poruke">Poruke</Link>  </li>
+
+
                     </>
                 : //ulogovani korisnici koji nisu admin mogu da vide korpu i da dodaju proizvode
                     <>
