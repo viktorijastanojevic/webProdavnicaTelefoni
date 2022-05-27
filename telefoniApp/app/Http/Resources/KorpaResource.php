@@ -14,6 +14,11 @@ class KorpaResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return  
+        [
+            'id' => $this->resource->id,
+            'user_id' => $this->resource->user_id,
+            
+        ];
     }
 }

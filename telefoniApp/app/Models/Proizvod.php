@@ -24,4 +24,8 @@ class Proizvod extends Model
     {
        return $this->belongsTo(Kategorija::class);
     }
+    public function stavke()
+    {
+       return $this->belongsTo(StavkaKorpe::class);
+    }
 }

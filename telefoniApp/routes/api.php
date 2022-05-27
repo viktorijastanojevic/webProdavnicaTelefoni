@@ -29,14 +29,17 @@ Route::get('proizvodi',[ProizvodController::class,'index']);
 
 Route::get('poruke',[PorukaController::class,'index']); //samo admin moze da vidi poruke
 
+Route::resource('/korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
+Route::resource('/stavke', StavkaKorpeController::class ) ;  
 
 Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogovani korisnici
     Route::get('/profiles', function (Request $request) {  
         return auth()->user();
     });
     Route::resource('stavkeKorpe', StavkaKorpeController::class ) ;
-    Route::resource('korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
-    Route::post('/korpe/{id}', [KorpaController::class,'addProducts']); //dodajeProizvodUkorpu
+
+  
+   
    
   
     Route::post('logout', [AuthController::class, 'logout']);  

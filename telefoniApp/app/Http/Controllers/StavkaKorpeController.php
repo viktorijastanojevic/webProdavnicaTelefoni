@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StavkaKorpe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StavkaKorpeController extends Controller
 {
@@ -35,7 +36,33 @@ class StavkaKorpeController extends Controller
      */
     public function store(Request $request )
     {
-      
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'korpa_id' =>  'required' , 
+                'proizvod_id' => 'required',  
+                'kolicina' => 'required'  ,
+                 
+
+            ]
+        );
+        if ($validator->fails()) 
+            return response()->json($validator->errors());
+
+
+         
+            
+
+        $p = StavkaKorpe::create([
+                'korpa_id' =>   $request->korpa_id, 
+                'proizvod_id' => $request->proizvod_id,  
+                'kolicina'=>$request->kolicina, 
+                 
+
+                
+           
+        ]);
+        return response()->json(["Uspesno kreirana stavka",$p]);
 ;    }
 
     /**
