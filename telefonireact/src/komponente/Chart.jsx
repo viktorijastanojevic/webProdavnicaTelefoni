@@ -8,30 +8,36 @@ import {
  HorizontalGridLines,
 } from "react-vis";
 
-const Chart = ( ) => {
+const Chart = ({telefoni, stavke} ) => {
   const data = [
    
   
   ];
-//   function brojSatiRadnika(id){
-//     var suma=0;
-//     for(var i=0;i<smene.length;i++){
-//       console.log(smene[i].radnik.id)
-//         if(smene[i].radnik.id===id){
-//           suma+=8;
-           
-//         } 
-//     }
-//     return suma;
-//   }
+  function cenaTelefona(id){
+    for(var i=0;i<telefoni.length;i++){
+        if(telefoni[i].id==id){
+            return telefoni[i].price;
+        }
+    }
+    return 0;
+}
+  function prihodOdTelefona(id){
+    var suma=0;
+    for(var i=0;i<stavke.length;i++){
+      if(stavke[i].proizvod_id===id){
+        suma+=stavke[i].kolicina*cenaTelefona(stavke[i].proizvod_id);
+      }
+    }
+    return suma;
+  }
   
-//   for(var i=0;i<zaposleni.length;i++){
-//     console.log(brojSatiRadnika(zaposleni[i].id))
-//     console.log(zaposleni[i].id)
+  
+   for(var i=0;i<telefoni.length;i++){
+ 
 
-//     data.push({x:zaposleni[i].id,y: brojSatiRadnika(zaposleni[i].id)})
-//       console.log(data)
-//   }
+     data.push({x:telefoni[i].id,y: prihodOdTelefona(telefoni[i].id)})
+      console.log(data)
+   }
 
 
 

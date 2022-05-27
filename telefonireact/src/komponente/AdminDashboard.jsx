@@ -115,7 +115,7 @@ const AdminDashboard = ({telefoni}) => {
             </div>
             <i className="fa fa-usd" aria-hidden="true"></i>
           </div>
-          <Chart />
+          <Chart telefoni={telefoni} stavke={stavke}/>
         </div>
 
         </div> 
