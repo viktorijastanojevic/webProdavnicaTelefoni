@@ -171,7 +171,7 @@ function removeProduct( id) {
             <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon} onAdd={addProduct} onRemove={removeProduct}></Ponuda>}></Route>
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
             <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
-            <Route path="/admin" element={ <AdminDashboard></AdminDashboard>}></Route>
+            <Route path="/admin" element={ <AdminDashboard telefoni={telefoni}></AdminDashboard>}></Route>
             <Route path="/admin/poruke" element={ <Poruke poruke={poruke}></Poruke>}></Route>
             <Route path="/admin/dodajProizvod" element={ <DodajTelefon></DodajTelefon>}></Route>
             <Route path="/admin/izmeniProizvod" element={ <IzmeniProizvod></IzmeniProizvod>}></Route>

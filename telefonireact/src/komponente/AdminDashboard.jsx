@@ -1,13 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Chart from './Chart';
 import "./AdminDashboard.css";
+import axios from 'axios';
+const axiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+  });
+const AdminDashboard = ({telefoni}) => {
 
-const AdminDashboard = () => {
-
-
-
-
-
+    const [stavke,setStavke] = useState([ ]);
+    useEffect(() => {
+      const getRandomLists4 = async () => {
+        try {
+          const res = await axiosInstance.get( "http://127.0.0.1:8000/api/stavke",
+            {
+              headers: {
+                token:
+                  "Bearer " +
+                  ( window.sessionStorage.getItem("auth_token")),
+              },
+            }
+          );
+          setStavke(res.data);
+          console.log(res.data)
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getRandomLists4();
+    }, [ axiosInstance]);
+    function brojProdatihProizvoda(){
+         var brojac=0;
+         for(var i=0;i<stavke.length;i++){
+             brojac+=stavke[i].kolicina;
+         }
+         return brojac;
+    }
+    function cenaTelefona(id){
+        for(var i=0;i<telefoni.length;i++){
+            if(telefoni[i].id==id){
+                return telefoni[i].price;
+            }
+        }
+        return 0;
+    }
+    function prihod(){
+        var suma=0;
+        for(var i=0;i<stavke.length;i++){
+           
+            suma+=stavke[i].kolicina*cenaTelefona(stavke[i].proizvod_id);
+        }
+        return suma;
+   }
 
 
   return (
@@ -34,16 +77,16 @@ const AdminDashboard = () => {
             aria-hidden="true"
           ></i>
           <div className="card_inner">
-            <p className="text-primary-p">Broj korisnika</p>
-            <span className="font-bold text-title">578</span>
+            <p className="text-primary-p">Broj prodatih proizvoda</p>
+            <span className="font-bold text-title">{brojProdatihProizvoda()}</span>
           </div>
         </div>
 
         <div className="cardAdmin">
-          <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
+          
           <div className="card_inner">
             <p className="text-primary-p">Broj proizvoda</p>
-            <span className="font-bold text-title">2467</span>
+            <span className="font-bold text-title">{telefoni.length}</span>
           </div>
         </div>
 
@@ -53,21 +96,12 @@ const AdminDashboard = () => {
             aria-hidden="true"
           ></i>
           <div className="card_inner">
-            <p className="text-primary-p">Number of Videos</p>
-            <span className="font-bold text-title">340</span>
+            <p className="text-primary-p">Ukupni prihod</p>
+            <span className="font-bold text-title">{prihod()}</span>
           </div>
         </div>
 
-        <div className="cardAdmin">
-          <i
-            className="fa fa-thumbs-up fa-2x text-green"
-            aria-hidden="true"
-          ></i>
-          <div className="card_inner">
-            <p className="text-primary-p">Number of Likes</p>
-            <span className="font-bold text-title">645</span>
-          </div>
-        </div>
+       
       </div>
       {/* <!-- MAIN CARDS ENDS HERE --> */}
 
