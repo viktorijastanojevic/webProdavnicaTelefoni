@@ -18,6 +18,7 @@ import NotFound404 from './komponente/NotFound404';
 import Korpa from './komponente/Korpa';
 import AdminDashboard from './komponente/AdminDashboard';
 import Poruke from './komponente/Poruke';
+import DodajTelefon from './komponente/DodajTelefon';
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
@@ -171,6 +172,7 @@ function removeProduct( id) {
             <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
             <Route path="/admin" element={ <AdminDashboard></AdminDashboard>}></Route>
             <Route path="/admin/poruke" element={ <Poruke poruke={poruke}></Poruke>}></Route>
+            <Route path="/admin/dodajProizvod" element={ <DodajTelefon></DodajTelefon>}></Route>
             
             
             <Route path="/*" element={<NotFound404></NotFound404>}/>

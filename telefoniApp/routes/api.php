@@ -48,6 +48,6 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulo
         return response()->json(['message'=>'You are in','status'=>200],200);
     });
 
-    Route::post('proizvodi',[ProizvodController::class,'store']);
+    Route::post('proizvod',[ProizvodController::class,'store']);
 
 });

@@ -43,7 +43,6 @@ class ProizvodController extends Controller
                 'name' =>  'required' , 
                 'description' => 'required|string|max:100', 
                 'price' => 'required',
-                'amount' => 'required',  
                 'category' => 'required'  ,
                 'image' =>'  '
 
@@ -60,7 +59,7 @@ class ProizvodController extends Controller
                 'name' =>   $request->name, 
                 'description' => $request->description, 
                 'price' =>  $request->price, 
-                'amount' =>  $request->amount, 
+             
                 'category' =>  $request->category, 
                 'image' =>  $request->image
            
