@@ -3,14 +3,48 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import React, { useEffect, useState } from "react";
 import {BsPlusLg, BsDashLg} from "react-icons/bs"
+import { useNavigate } from "react-router-dom";
+
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
 const Korpa = ({products, sum,onAdd,onRemove}) => {  
- 
- 
-
-
+  
+    var navigate = useNavigate();
     function sacuvajKorpuUBazi(){
+      const user_id=window.sessionStorage.getItem('auth_id');
+      
+        //cuvacemo samo stavke korpe, za id korpe cemo uzeti id korisnika (jedna korpa za jednog usera)
+        products.map(p=>{
+          console.log(p)
+          console.log("http://127.0.0.1:8000/api/stavke/?korpa_id="+user_id+"&proizvod_id="+p.id+"&kolicina="+p.amount+"&user_id="+user_id)
 
+          axios
+          .post("http://127.0.0.1:8000/api/stavke/?korpa_id="+user_id+"&proizvod_id="+p.id+"&kolicina="+p.amount+"&user_id="+user_id,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
+          .then((res)=>{  
+              console.log(res.data);
+               alert("A")
+               navigate("/");
+          })
+          .catch(function (error) {
+              if (error.response) {
+                // Request made and server responded
+                console.log(error.response.data);
+                
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              } else if (error.request) {
+                // The request was made but no response was received
+                console.log(error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+          
+            });
+        })
 
+      
         
     }
     function exportPDF() {
