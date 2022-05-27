@@ -113,7 +113,7 @@ class ProizvodController extends Controller
             $l->name = $request->name;
             $l->description = $request->description;
             $l->price = $request->price;
-            $l->category = $request->category;
+            $l->category  =1;
             $l->image = $request->image;
             $l->kamera = $request->kamera;
             $l->tezina = $request->tezina;

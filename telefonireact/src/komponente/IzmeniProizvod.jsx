@@ -57,34 +57,7 @@ const IzmeniProizvod = () => {
        
     }
     let navigate = useNavigate();
-    function handleAdd(e){
-     
-      
-            e.preventDefault();   
-            axios
-                .put("http://127.0.0.1:8000/api/proizvod", productData,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
-                .then((res)=>{  
-                    console.log(res.data);
-                     alert("A")
-                     navigate("/admin");
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                      // Request made and server responded
-                      console.log(error.response.data);
-                      
-                      console.log(error.response.status);
-                      console.log(error.response.headers);
-                    } else if (error.request) {
-                      // The request was made but no response was received
-                      console.log(error.request);
-                    } else {
-                      // Something happened in setting up the request that triggered an Error
-                      console.log('Error', error.message);
-                    }
-                
-                  });
-    }
+ 
 
     function obrisi(e){
 
@@ -95,6 +68,32 @@ const IzmeniProizvod = () => {
         )
         alert("USPESNO")
 
+    }
+    function azuriraj(e){
+        e.preventDefault();   
+        axios
+            .put("http://127.0.0.1:8000/api/proizvod", productData,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
+            .then((res)=>{  
+                console.log(res.data);
+                 alert("A")
+                 navigate("/admin");
+            })
+            .catch(function (error) {
+                if (error.response) {
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  console.log(error.request);
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                }
+            
+              });
     }
 
   return (
@@ -159,7 +158,7 @@ const IzmeniProizvod = () => {
                     <div>
                      
                          
-                        <select  className="input--style-3" name="category" id="category" onInput={handleInput}>
+                        <select  className="input--style-3" name="category" id="category" defaultValue={productData.category.id} onInput={handleInput}>
                                         
                                         <option  className="input--style-3" value="1" id={1} >zicni telefoni</option>
                                         <option className="input--style-3" value="2" id={2} > standardni telefoni </option> 
@@ -175,7 +174,7 @@ const IzmeniProizvod = () => {
                     
                 <div className="container-login100-form-btn">
                  
-                    <button className="login100-form-btn" id="izmeni" name="izmeni"> 	Izmeni 	</button>
+                    <button className="login100-form-btn" id="izmeni" name="izmeni" onClick={azuriraj}> 	Izmeni 	</button>
                     <button className="login100-form-btn" id="obrisi" name="obrisi" onClick={obrisi}> 	Obrisi 	</button>
 
                 </div>

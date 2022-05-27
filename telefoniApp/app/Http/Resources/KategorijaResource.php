@@ -15,7 +15,7 @@ class KategorijaResource extends JsonResource
     public function toArray($request)
     {
         return  [
-            
+            'id'=> $this->resource->id,
             'naziv' => $this->resource->naziv
         ];
     }
