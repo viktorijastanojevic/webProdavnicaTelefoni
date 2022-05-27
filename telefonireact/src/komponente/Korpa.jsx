@@ -1,14 +1,28 @@
+import axios from "axios";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {BsPlusLg, BsDashLg} from "react-icons/bs"
-const Korpa = ({products, sum,onAdd,onRemove}) => {
+const Korpa = ({products, sum,onAdd,onRemove}) => {  
+ 
+ 
+
+
     function sacuvajKorpuUBazi(){
 
 
         
     }
     function exportPDF() {
+
+      var valute = document.getElementById('currency');
+      var trenutnaValuta  = valute.selectedIndex 
+        if(trenutnaValuta===1)//EUR
+        {
+
+        }else{ //USD
+
+        }
         sacuvajKorpuUBazi();
         const unit = "pt";
         const size = "A4"; // Use A1, A2, A3 or A4
@@ -22,7 +36,7 @@ const Korpa = ({products, sum,onAdd,onRemove}) => {
         const footer = "\t\t\t\t\t\t\t\t\t\t\t\tUKUPNO ZA UPLATU: "+sum;
         const title = "Racun na dan: "+  today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()+footer;
         const headers = [["MODEL", "CENA","KOLICINA","UKUPNO"]];
-        console.log(products)
+       // console.log(products)
         const data = products.map(elt=> [elt.name, elt.price, elt.amount, elt.price*elt.amount]);
       
         let content = {
@@ -40,6 +54,15 @@ const Korpa = ({products, sum,onAdd,onRemove}) => {
     return (
       
           <div className="telefoniUporedjivanje"><h3>Vaša korpa:</h3> 
+          <br /><br /><br />
+          <label htmlFor="currency">U kojoj valuti zelite racun</label>
+
+          <select name="currency" id="currency"  >
+            <option value="RSD" >RSD</option>
+            <option value="EUR" >EUR</option>
+            <option value="USD" >USD</option>
+ 
+          </select>
           <br /><br /><br />
           <table className="tabelaKorpa">
             <tbody >
