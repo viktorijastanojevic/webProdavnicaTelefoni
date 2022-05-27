@@ -49,5 +49,10 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulo
     });
 
     Route::post('proizvod',[ProizvodController::class,'store']);
+    Route::put('proizvod',[ProizvodController::class,'update']);
+    Route::delete('proizvod/{id}',[ProizvodController::class,'destroy']);
+
+    Route::get('proizvod/{id}',[ProizvodController::class,'show']);
+
 
 });

@@ -59,7 +59,9 @@ class ProizvodController extends Controller
                 'name' =>   $request->name, 
                 'description' => $request->description, 
                 'price' =>  $request->price, 
-             
+                'tezina'=>$request->tezina, 
+                'kamera'=>$request->kamera, 
+
                 'category' =>  $request->category, 
                 'image' =>  $request->image
            
@@ -96,9 +98,39 @@ class ProizvodController extends Controller
      * @param  \App\Models\Proizvod  $proizvod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proizvod $proizvod)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            
+             
+        ]);
+
+        if ($validator->fails()) 
+            return response()->json($validator->errors());
+
+        $l=Proizvod::find($request->id);
+        if($l){
+            $l->name = $request->name;
+            $l->description = $request->description;
+            $l->price = $request->price;
+            $l->category = $request->category;
+            $l->image = $request->image;
+            $l->kamera = $request->kamera;
+            $l->tezina = $request->tezina;
+            $l->amount =0;
+            $l->uporedi =0;
+            $l->memorija =4;
+            $l->baterija =4000;
+
+
+
+
+            
+            $l->save();
+            return response()->json(['Proizvod uspesno izmenjen!', new ProizvodResource($l)]);
+        }else{
+            return response()->json('Trazeni objekat ne postoji u bazi');
+        }
     }
 
     /**
@@ -107,8 +139,17 @@ class ProizvodController extends Controller
      * @param  \App\Models\Proizvod  $proizvod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proizvod $proizvod)
+    public function destroy($id)
     {
-        //
+        $p = Proizvod::find($id);
+        if($p){ 
+            $p->delete();
+            return response()->json("uspesno obrisano!" );
+        } else {
+
+            return response()->json([
+                'message' => 'Ne postoji u bazi.',
+            ], 400);
+        }
     }
 }
