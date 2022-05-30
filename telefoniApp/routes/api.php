@@ -27,7 +27,9 @@ Route::get('proizvodi',[ProizvodController::class,'index']);
 
 
 Route::post('kontakt', [PorukaController::class, 'primiPoruku']);   //ulogovan ili ne svako moze da nam posalje poruku
-
+  
+Route::resource('/korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
+Route::resource('/stavke', StavkaKorpeController::class ) ;  
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogovani korisnici
@@ -36,9 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogova
     });
     Route::resource('stavkeKorpe', StavkaKorpeController::class ) ;
 
-  
-    Route::resource('/korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
-    Route::resource('/stavke', StavkaKorpeController::class ) ;  
+
    
    
   

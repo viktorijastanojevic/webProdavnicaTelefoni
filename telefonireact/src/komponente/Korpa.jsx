@@ -10,6 +10,51 @@ const axiosInstance = axios.create({
 });
 const Korpa = ({products, sum,onAdd,onRemove}) => {  
   
+
+  //javni web servis da dobijemo koeficijent RSD_EUR
+      const [RSD_EUR, setRSDEUR] = useState([]);
+      useEffect(() => {
+          axios({
+            method: "GET",
+            url:
+              "https://api.currencyapi.com/v3/latest?apikey=zbICuoNBacI03bcETlGc6Pm9LJS4x5c5lgmNTBj4&currencies=RSD&base_currency=EUR",
+               
+          })
+            .then((response) => {
+              console.log(response.data.data['RSD'].value);
+              setRSDEUR(response.data.data['RSD'].value);
+              
+            })
+            .catch((error) => {
+              console.log(error);
+          });
+      }, []);
+
+
+
+  //javni web servis da dobijemo koeficijent RSD_USD
+  const [RSD_USD, setRSDUSD] = useState([]);
+      useEffect(() => {
+        axios({
+          method: "GET",
+          url:
+            "https://api.currencyapi.com/v3/latest?apikey=zbICuoNBacI03bcETlGc6Pm9LJS4x5c5lgmNTBj4&currencies=RSD&base_currency=USD",
+             
+        })
+          .then((response) => {
+            console.log(response.data.data['RSD'].value);
+            setRSDUSD(response.data.data['RSD'].value);
+            
+          })
+          .catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+
+
+
+
     var navigate = useNavigate();
     function sacuvajKorpuUBazi(){
       const user_id=window.sessionStorage.getItem('auth_id');
@@ -51,10 +96,15 @@ const Korpa = ({products, sum,onAdd,onRemove}) => {
 
       var valute = document.getElementById('currency');
       var trenutnaValuta  = valute.selectedIndex 
+      var koeficijentValute=1;
+      var oznakaValute="RSD";
         if(trenutnaValuta===1)//EUR
         {
-
+          koeficijentValute=RSD_EUR;
+          oznakaValute="EUR";
         }else{ //USD
+          koeficijentValute=RSD_USD;
+          oznakaValute="USD";
 
         }
         sacuvajKorpuUBazi();
@@ -67,11 +117,11 @@ const Korpa = ({products, sum,onAdd,onRemove}) => {
     
         doc.setFontSize(15);
         var today = new Date();
-        const footer = "\t\t\t\t\t\t\t\t\t\t\t\tUKUPNO ZA UPLATU: "+sum;
+        const footer = " \t\t\t\t\t\t\t\tUKUPNO ZA UPLATU: "+(sum/koeficijentValute).toFixed(2) + "["+oznakaValute+"]";
         const title = "Racun na dan: "+  today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()+footer;
-        const headers = [["MODEL", "CENA","KOLICINA","UKUPNO"]];
+        const headers = [["MODEL", "CENA["+oznakaValute+"]","KOLICINA","UKUPNO["+oznakaValute+"]"]];
        // console.log(products)
-        const data = products.map(elt=> [elt.name, elt.price, elt.amount, elt.price*elt.amount]);
+        const data = products.map(elt=> [elt.name, (elt.price/koeficijentValute).toFixed(2), elt.amount, (elt.price*elt.amount/koeficijentValute).toFixed(2)]);
       
         let content = {
           startY: 50,
