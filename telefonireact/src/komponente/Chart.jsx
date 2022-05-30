@@ -45,7 +45,7 @@ const Chart = ({telefoni, stavke} ) => {
 
  return (
    <div style={{ margin: "15px" }}>
-     <XYPlot height={300} width={300}>
+     <XYPlot height={300} width={600}>
        <VerticalGridLines />
        <HorizontalGridLines />
        <XAxis />

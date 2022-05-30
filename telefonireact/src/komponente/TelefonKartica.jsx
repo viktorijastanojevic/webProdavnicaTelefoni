@@ -5,7 +5,7 @@ import { MdMobileScreenShare,MdPriceChange } from 'react-icons/md';
 import { FaWeightHanging } from 'react-icons/fa';
 import {BsPlusLg, BsDashLg} from "react-icons/bs"
 
-function TelefonKartica({product,dodajTelefon,onAdd,onRemove, inCart}) {
+function TelefonKartica({product,dodajTelefon,onAdd,onRemove}) {
   return (
     <div className="card">
      

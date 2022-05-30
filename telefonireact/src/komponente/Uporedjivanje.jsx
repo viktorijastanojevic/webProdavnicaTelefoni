@@ -3,7 +3,7 @@ import React from 'react'
  
 
 function Uporedjivanje({telefoniUporedjivanje,brojTelefonaZaUporedjivanje}) {
-    let brojac=0;
+
 
   return (
     <div className='telefoniUporedjivanje' >

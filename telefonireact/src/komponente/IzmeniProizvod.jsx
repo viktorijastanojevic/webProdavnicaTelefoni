@@ -23,7 +23,8 @@ const IzmeniProizvod = () => {
         ekran:'5.8',
         baterija:5000, 
         kamera:13, 
-        category:4
+        category:4,
+        id:0
 
 
 
@@ -75,7 +76,7 @@ const IzmeniProizvod = () => {
             .put("http://127.0.0.1:8000/api/proizvod", productData,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
             .then((res)=>{  
                 console.log(res.data);
-                 alert("A")
+                 alert("USPESNO")
                  navigate("/admin");
             })
             .catch(function (error) {

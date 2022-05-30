@@ -9,7 +9,8 @@ function Register() {
         name:"",
         phone:"",
         birthdate:"",
-        password:""
+        password:"",
+        drzava:""
     });
     function handleInput(e){ //fja koja se poziva prilikom eventa e
         //console.log(e); //probaj
