@@ -20,7 +20,10 @@ class AuthController extends Controller
                 'name' => 'required|string|max:100', 
                 'email' => 'required|string|max:100|email',
                 'phone' => 'string',  
-                'birthdate' => 'string' 
+                'birthdate' => 'string' ,
+                'drzava' => 'string' ,
+
+            
 
             ]
         );
@@ -36,6 +39,8 @@ class AuthController extends Controller
             'email' => $request->email, 
             'phone' => $request->phone,
             'birthdate' =>$request->birthdate,
+            'drzava' =>$request->drzava,
+
             'password' => Hash::make($request->password)]);
             
 

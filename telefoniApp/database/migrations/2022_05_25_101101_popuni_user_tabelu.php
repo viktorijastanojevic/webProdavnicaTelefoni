@@ -16,6 +16,8 @@ class PopuniUserTabelu extends Migration
         Schema::table('users', function (Blueprint $table) {
             
             $table->string('phone')->default("+38161 5424 9544") ;
+            $table->string('drzava')->default("Serbia") ;
+
             $table->date('birthdate')->default('1987-4-6') ;
             $table->boolean('admin')->default(false);
            

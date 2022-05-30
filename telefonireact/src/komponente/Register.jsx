@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from "react";
  import './LoginStyle.css';
 import axios from "axios";
@@ -23,6 +23,7 @@ function Register() {
         //te podatke sada treba da saljemo laravelu, ali to radimo kada korisnik submituje formu
     }
     let navigate = useNavigate();
+
     function handleRegister(e){
              
             e.preventDefault();   
@@ -49,6 +50,30 @@ function Register() {
                 
                   });
     }
+
+
+    const [drzave, setDrzave] = useState([]);
+    useEffect(() => {
+        axios({
+          method: "GET",
+          url:
+            "https://restcountries.com/v3.1/all",
+        })
+          .then((response) => {
+            console.log(response.data[0].name.common);
+            setDrzave(response.data);
+            
+          })
+          .catch((error) => {
+            console.log(error);
+         });
+     }, []);
+
+
+
+
+
+
   return (
     <div className="limiter">
     <div className="container-login100">
@@ -93,6 +118,16 @@ function Register() {
                     <span className="label-input100">Password</span>
                     <input className="input100" type="password" name="password" id="password" placeholder="Enter password" onInput={handleInput}/>
                     <span className="focus-input100"></span>
+                </div>
+
+                <div className="wrap-input100 validate-input m-b-26" data-validate="Birthdate is required">
+                    <span className="label-input100">Drzava </span>
+                    <select  className="input--style-3" name="mesto" id="mesto"    onInput={handleInput}>
+                                            {drzave.map((d)=><option  className="input--style-3" value={d.name.common} key={d.name.common}  >{d.name.common} </option> )}
+                                         
+                                          
+
+                                      </select>
                 </div>
 
                 <div className="flex-sb-m w-full p-b-30">
