@@ -28,6 +28,9 @@ const AdminDashboard = ({telefoni}) => {
       };
       getRandomLists4();
     }, [ axiosInstance]);
+
+
+    
     function brojProdatihProizvoda(){
          var brojac=0;
          for(var i=0;i<stavke.length;i++){

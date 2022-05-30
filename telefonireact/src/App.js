@@ -24,12 +24,14 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 function App() {
-  const [cartNum, setCartNum] = useState(0); 
-  const [sort, setSort] = useState(true);
+   
   const[token,setToken] = useState();
-  
+
+
+  const [cartNum, setCartNum] = useState(0); 
   const [cartProducts, setCartProducts] = useState([]);
   const [sum, setSumPrice] = useState(0); 
+
   const [telefoniUporedjivanje, setTelefoniUporedjivanje] = useState([]);
   const [brojTelefonaZaUporedjivanje, setBrTelZaUp] = useState(0);
   
@@ -118,7 +120,7 @@ function jeUKorpi(id){
   var postoji=0;
   cartProducts.forEach((p) => {
     if (p.id === id) {
-      console.log("C")
+     
       postoji=1;
     }
   });
@@ -140,9 +142,9 @@ function addProduct( id) {
 }
 
 function removeProduct( id) {
-  console.log("A")
+ 
   if(jeUKorpi(id)===1){
-    console.log("B")
+   
     setCartNum(cartNum - 1);
     telefoni.forEach((p) => {
       if (p.id === id) {
@@ -175,11 +177,13 @@ function removeProduct( id) {
           
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
             <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
+
             <Route path="/admin" element={ <AdminDashboard telefoni={telefoni}></AdminDashboard>}></Route>
 
 
             <Route path="/admin/poruke" element={ <Poruke poruke={poruke}></Poruke>}></Route>
             <Route path="/admin/dodajProizvod" element={ <DodajTelefon></DodajTelefon>}></Route>
+
             <Route path="/admin/izmeniProizvod" element={ <IzmeniProizvod></IzmeniProizvod>}></Route>
             
             

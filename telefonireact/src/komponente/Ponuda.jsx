@@ -21,13 +21,13 @@ function Ponuda({telefoni,dodajTelefon,onAdd,onRemove }) {
               <>
                 {telefoni
                      .sort((a, b) => a.price < b.price ? -1 : 1)
-                    .map((t)=>(<TelefonKartica key={t.id} product={t} dodajTelefon={dodajTelefon}  onAdd={onAdd} onRemove={onRemove} inCart={1}></TelefonKartica>))}
+                    .map((t)=>(<TelefonKartica key={t.id} product={t} dodajTelefon={dodajTelefon}  onAdd={onAdd} onRemove={onRemove} ></TelefonKartica>))}
               </>
               :
               <>
                 {telefoni
                      .sort((a, b) => a.price > b.price ? -1 : 1)
-                    .map((t)=>(<TelefonKartica key={t.id} product={t} dodajTelefon={dodajTelefon}  onAdd={onAdd} onRemove={onRemove} inCart={1}></TelefonKartica>))}
+                    .map((t)=>(<TelefonKartica key={t.id} product={t} dodajTelefon={dodajTelefon}  onAdd={onAdd} onRemove={onRemove}></TelefonKartica>))}
               </>
             }
           
