@@ -8,12 +8,12 @@ const Poruke = ({poruke}) => {
        
         columns: [
           {
-            label: 'Ime',
-            field: 'name',
+            label: 'ime',
+            field: 'ime',
             width: 150,
             attributes: {
               'aria-controls': 'DataTable',
-              'aria-label': 'Name',
+              'aria-label': 'ime',
             },
           },
           {
@@ -30,7 +30,7 @@ const Poruke = ({poruke}) => {
         ],
         rows:  poruke.map(p=>{
             return{
-                name: p.ime,
+                ime: p.ime,
                 email: p.email,
                 poruka: p.poruka
             }

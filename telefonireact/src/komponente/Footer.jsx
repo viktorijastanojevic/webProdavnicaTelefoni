@@ -40,7 +40,7 @@ function Footer() {
         <div className="row">
           <div className="col-md-8 col-sm-6 col-xs-12">
             <p className="copyright-text">Copyright &copy; 2022 All Rights Reserved by   
-         <a href="#"> Viktorija Stanojevic & AleksandraRistic</a>.
+         <a href="#"> Viktorija Stanojevic & Aleksandra Ristic</a>.
             </p>
           </div>
 

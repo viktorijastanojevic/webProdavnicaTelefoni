@@ -16,8 +16,8 @@ function Login({addToken}) {
         //kada korisnik unese username i pass hocemo da setujemo te vrednosti u userData
         let newUserData = userData; //postavimo usera da mu ime bude "" i da mu pass bude ""
         //e.target.value; predstavlja vrednost koju korisnik unese u polje
-        newUserData[e.target.name]=e.target.value;
-        //console.log(newUserData);//probaj
+        newUserData[e.target.name]=e.target.value; //newUserData['email']=e.target.value;
+        console.log(newUserData);//probaj
         setUserData(newUserData); //podatke koje smo pokupili iz forme sada upisujemo u polje userData
         //te podatke sada treba da saljemo laravelu, ali to radimo kada korisnik submituje formu
     }

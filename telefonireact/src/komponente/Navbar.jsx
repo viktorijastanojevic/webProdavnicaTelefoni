@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { BsCartFill } from "react-icons/bs";
 import axios from "axios";
-import Kontakt from './Kontakt';
+
 function Navbar({cartNum,token}) {
   
   function handleLogout(){ 
@@ -25,6 +25,7 @@ function Navbar({cartNum,token}) {
      
       window.sessionStorage.setItem('auth_token',null); 
       window.sessionStorage.setItem('auth_name',null); 
+      window.sessionStorage.setItem('auth_id',null); 
       
 
     })

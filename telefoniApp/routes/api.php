@@ -18,19 +18,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('poruke',[PorukaController::class,'index']); //samo admin moze da vidi poruke
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 
-Route::post('kontakt', [PorukaController::class, 'primiPoruku']);   //ulogovan ili ne svako moze da nam posalje poruku
 Route::get('proizvodi',[ProizvodController::class,'index']);
 
 
-Route::get('poruke',[PorukaController::class,'index']); //samo admin moze da vidi poruke
+Route::post('kontakt', [PorukaController::class, 'primiPoruku']);   //ulogovan ili ne svako moze da nam posalje poruku
 
-Route::resource('/korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
-Route::resource('/stavke', StavkaKorpeController::class ) ;  
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogovani korisnici
     Route::get('/profiles', function (Request $request) {  
@@ -39,12 +37,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogova
     Route::resource('stavkeKorpe', StavkaKorpeController::class ) ;
 
   
+    Route::resource('/korpe', KorpaController::class ) ; //sluzi za kreiranje prazne korpe kad se korinisk uloguje
+    Route::resource('/stavke', StavkaKorpeController::class ) ;  
    
    
   
     Route::post('logout', [AuthController::class, 'logout']);  
   
 });
+
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulogovan admin
 
     Route::get('/proveri', function(){
@@ -56,6 +57,6 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulo
     Route::delete('proizvod/{id}',[ProizvodController::class,'destroy']);
 
     Route::get('proizvod/{id}',[ProizvodController::class,'show']);
-
+    
 
 });

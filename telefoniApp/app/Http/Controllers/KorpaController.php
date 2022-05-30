@@ -100,27 +100,7 @@ class KorpaController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'cartKey' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors(),
-            ], 400);
-        }
-
-        $cartKey = $request->input('cartKey');
-        $korpa = Korpa::find($id);
-        if ($korpa->key == $cartKey) {
-            $korpa->delete();
-            return response()->json("uspesno obrisana korpa!" );
-        } else {
-
-            return response()->json([
-                'message' => 'The CarKey you provided does not match the Cart Key for this Cart.',
-            ], 400);
-        }
+       
     }
     
   

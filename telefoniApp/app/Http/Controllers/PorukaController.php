@@ -28,7 +28,7 @@ class PorukaController extends Controller
                 
                 'ime' => 'required|string|max:100', 
                 'email' => 'required|string|max:100|email',
-                'poruka' => 'string'
+                'poruka' => 'required|string'
                
             ]
         );

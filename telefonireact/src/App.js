@@ -27,10 +27,12 @@ function App() {
   const [cartNum, setCartNum] = useState(0); 
   const [sort, setSort] = useState(true);
   const[token,setToken] = useState();
+  
   const [cartProducts, setCartProducts] = useState([]);
   const [sum, setSumPrice] = useState(0); 
   const [telefoniUporedjivanje, setTelefoniUporedjivanje] = useState([]);
   const [brojTelefonaZaUporedjivanje, setBrTelZaUp] = useState(0);
+  
   const [poruke,setPoruke] = useState([]);
 
   const [telefoni,setTelefoni] = useState([ ]);
@@ -166,12 +168,16 @@ function removeProduct( id) {
             <Route path="/kontakt" element={ <Kontakt></Kontakt>}></Route>
 
             <Route path="/login" element={ <Login addToken={addToken}></Login>}></Route>
-            <Route path="/register" element={ <Register addToken={addToken}></Register>}></Route>
+            <Route path="/register" element={ <Register ></Register>}></Route>
 
             <Route path="/telefoni" element={ <Ponuda   telefoni={telefoni} dodajTelefon={dodajTelefon} onAdd={addProduct} onRemove={removeProduct}></Ponuda>}></Route>
+          
+          
             <Route path="/uporedi" element={ <Uporedjivanje telefoniUporedjivanje={telefoniUporedjivanje} brojTelefonaZaUporedjivanje={brojTelefonaZaUporedjivanje}></Uporedjivanje>}></Route>
             <Route   path="/korpa" element={<Korpa onAdd={addProduct} onRemove={removeProduct} products={cartProducts} sum={sum}/>}/>
             <Route path="/admin" element={ <AdminDashboard telefoni={telefoni}></AdminDashboard>}></Route>
+
+
             <Route path="/admin/poruke" element={ <Poruke poruke={poruke}></Poruke>}></Route>
             <Route path="/admin/dodajProizvod" element={ <DodajTelefon></DodajTelefon>}></Route>
             <Route path="/admin/izmeniProizvod" element={ <IzmeniProizvod></IzmeniProizvod>}></Route>

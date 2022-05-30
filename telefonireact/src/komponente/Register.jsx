@@ -3,7 +3,7 @@ import {useState} from "react";
  import './LoginStyle.css';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-function Register({addToken}) {
+function Register() {
     const [userData,setUserData]=useState({
         email:"",
         name:"",

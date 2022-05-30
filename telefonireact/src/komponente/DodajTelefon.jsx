@@ -42,7 +42,7 @@ const DodajTelefon = () => {
                 .post("http://127.0.0.1:8000/api/proizvod", productData,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
                 .then((res)=>{  
                     console.log(res.data);
-                     alert("A")
+                     alert("USPESNO")
                      navigate("/admin");
                 })
                 .catch(function (error) {
